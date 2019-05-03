@@ -1,14 +1,17 @@
 arenaMax = 10
 scaleMax = 5
 turnsMax = 500
-accuracyMax = 0.10
+accuracyMax = 1
 count = 100
 move = 1
-nameList = []
+
 
 import random
 
 class instance:
+
+    #here to make instances iterable#
+    nameList = []
 
     def __init__(self, name, scaleBias, turnsBias, accuracyBias):
         self.name = name
@@ -27,34 +30,34 @@ class instance:
         if self.name % 10 == 0:
             print("\r")
 
-        #to give statistically improved performance based on sucessfullness of last round#
-        def renew(self, name, scaleBias, turnsBias, accuracyBias):
-            self.name = name
-            nameList.append(self.name)
-            self.scale = random.randint(-1 * scaleMax, scaleMax) + scaleBias
-        self.turns = random.randint(0, turnsMax) + turnsBias
-        self.Ypos = 0
-        self.Xpos = 0
-        self.attempts = 0
-        while self.turns <= 0:
-            self.turns += 1
-        self.accuracy = random.randint(0, 101) / 100 + accuracyBias
-        while self.accuracy <= 0:
-            self.accuracy += 0.01
-        print("Instance Number:",self.name, "Scale:", self.scale, "Turns:", self.turns, "Accuracy:",self.accuracy)
-        if self.name % 10 == 0:
-            print("\r")
-
-    #for the unlucky ones#
-    def __del__(self):
-        print("Instance number" , self.name , "has been deleated due to poor performance :(")
-        nameList.remove(self.name)
+#to give statistically improved performance based on sucessfullness of last round#
+##    def renew(self, newName, scaleBias, turnsBias, accuracyBias):
+##        self.name = newName
+##        nameList.append(self.name)
+##        self.scale = random.randint(-1 * scaleMax, scaleMax) + scaleBias
+##    self.turns = random.randint(0, turnsMax) + turnsBias
+##    self.Ypos = 0
+##    self.Xpos = 0
+##    self.attempts = 0
+##    while self.turns <= 0:
+##        self.turns += 1
+##    self.accuracy = random.randint(0, 101) / 100 + accuracyBias
+##    while self.accuracy <= 0:
+##        self.accuracy += 0.01
+##    print("Instance Number:",self.name, "Scale:", self.scale, "Turns:", self.turns, "Accuracy:",self.accuracy)
+##    if self.name % 10 == 0:
+##        print("\r")
+##
+##    #for the unlucky ones#
+##    def __del__(self):
+##        print("Instance number" , self.name , "has been deleated due to poor performance :(")
+##        nameList.remove(self.name)
 
 
 def createBots(count,a,b,c):
     print("Instance data:")
     for i in range(0, count):
-        instance(i,a,b,c)
+        instance(i,0,0,0)
 
 
 def manager():
@@ -143,4 +146,3 @@ def manager():
         createBots(1, scaleBias, turnsBias, accuracyBias)
 
 createBots(count, 0,0,0)
-manager()
