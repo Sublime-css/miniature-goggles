@@ -2,7 +2,7 @@ arenaMax = 10
 scaleMax = 5
 turnsMax = 500
 accuracyMax = 1
-count = 100
+count = 50
 move = 1
 nameList = []
 
@@ -31,9 +31,9 @@ class instance:
             print("\r")
 
     #for the unlucky ones#
-    def __del__(self):
-        print("Instance number" , self.name , "has been deleated due to poor performance :(")
-        nameList.remove(self.name)
+##    def __del__(self):
+##        print("Instance number" , self.name , "has been deleated due to poor performance :(")
+##        nameList.remove(self.name)
 
 def createBots(count,a,b,c):
     print("Instance data:")
@@ -85,7 +85,7 @@ def manager():
 
             #kill the failures
             if instance(a).sucess == 0:
-                del instance(a)
+                nameList.remove(a)
 
             #reset instance to 0 and count average
             else:
@@ -99,7 +99,7 @@ def manager():
         #kill worst 50% of instances:
         for a in nameList:
             if a.turns < average:
-                del instance(a)
+                nameList.remove(a)
 
         #ensure half are dead becasue floats are weird:
         while len(nameList) > count / 2:
@@ -128,3 +128,4 @@ def manager():
             createBots(1, scaleBias, turnsBias, accuracyBias)
 
 createBots(count, 0,0,0)
+#manager()
